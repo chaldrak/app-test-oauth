@@ -49,16 +49,17 @@ export default function Exaku<P extends ExakuProfile>(
     name: "Exaku",
     type: "oauth",
     authorization: {
-      url: `${env.NEXT_PUBLIC_EXAKU_URL}/api/oauth2/authorize`,
+      url: `${env.NEXT_PUBLIC_EXAKU_URL}/api/v1/oauth2/authorize`,
       params: { scope: "identify email" },
     },
-    token: `${env.NEXT_PUBLIC_EXAKU_URL}/api/oauth2/token`,
-    userinfo: `${env.NEXT_PUBLIC_EXAKU_URL}/api/v1/user/me`,
+    token: `${env.NEXT_PUBLIC_EXAKU_URL}/api/v1/oauth2/token`,
+    userinfo: `${env.NEXT_PUBLIC_EXAKU_URL}/api/v1/oauth2/user-info`,
     profile(profile) {
+      console.log(profile)
       return {
         id: profile.id,
         email: profile.email,
-        name: profile.user_name,
+        name: profile.firstName + " " + profile.lastName,
       };
     },
     style: { bg: "#5865F2", text: "#fff" },
